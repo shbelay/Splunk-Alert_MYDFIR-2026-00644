@@ -2,7 +2,7 @@
 
 **Case ID:** MYDFIR-2026-00644  
 **Host:** KCD-Web  
-**Investigation Date:** 2026-08-28 09:00 UTC  
+**Alert Raised Date:** 2026-08-28 09:00 UTC  
 **Primary User:** KCD-Web\administrator with SYSTEM privileges
 
 ---
