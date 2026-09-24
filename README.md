@@ -90,26 +90,32 @@ index=* host="KCD-Web" "Stub.exe" earliest="8/28/2026:09:00:30" latest="8/28/202
 
 ## 7. Investigated after DataRecovery.txt but no logs
 
+Checked to see if ransom notes were left anywhere else in the environment
 ```spl
 index=* "DataRecovery.txt"
 ```
 
+Checked for file creation that mimics ransomware with unique file extensions or file deletions
 ```spl
 index=* earliest="8/28/2026:08:30:00" latest="8/28/2026:10:30:00" (EventCode=11 OR EventCode=23) | table _time host Image file_path | sort _time
 ```
 
+Queried Stub.exe across the environment with hash and name
 ```spl
 index=* "Stub.exe" | table _time Image Hashes
 ```
 
+Queried those values across the environment
 ```spl
 index=* ("2D5E72B81C236DB1FD30978E2AD6A20D241945090B90F2CC2A36993469DC144F" OR "B0A2B3C075C7E705DC31E872F51FDFF00F571B8B806D025FE4867B340A7EF08C" OR "Stub.exe")
 ```
 
+Queried outbound activity with the IP address found later 
 ```spl
 index=* 91.99.176.42 | sort + _time | table _time EventCode EventDescription process_name process_path QueryName user action
 ```
 
+Looked for network activity
 ```spl
 index=* earliest="8/28/2026:08:30:00" latest="8/28/2026:10:30:00" EventCode=3
 | stats count values(process_name) AS processes
@@ -120,6 +126,7 @@ index=* earliest="8/28/2026:08:30:00" latest="8/28/2026:10:30:00" EventCode=3
 | sort - count
 ```
 
+DNS Queries
 ```spl
 index=* earliest="8/28/2026:08:30:00" latest="8/28/2026:10:30:00" EventCode=22
 | stats count
@@ -131,6 +138,7 @@ index=* earliest="8/28/2026:08:30:00" latest="8/28/2026:10:30:00" EventCode=22
 | sort – count
 ```
 
+File compression / archiving evidence
 ```spl
 index=* earliest="8/28/2026:09:00:00" latest="8/28/2026:11:00:00" EventCode=1 (CommandLine="*7z*" OR CommandLine="*rar*" OR CommandLine="*tar*" OR CommandLine="*rclone*" OR CommandLine="*curl*" OR CommandLine="*scp*") | table _time User ParentImage process_name process_path CommandLine | sort + _time
 ```
