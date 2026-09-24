@@ -2,7 +2,7 @@
 
 **Case ID:** MYDFIR-2026-00644  
 **Host:** KCD-Web  
-**Alert Raised Date:** 2026-08-28 09:00 UTC  
+**Alert Raised Date:** August 28, 2026 at 09:00 UTC  
 **User:** KCD-Web\administrator with SYSTEM privileges  
 **File Path:** C:\Users\administrator\Pictures\dcontrol\dControl.exe
 
